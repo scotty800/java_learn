@@ -1,21 +1,44 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        Etudiant[] students = new Etudiant[3];
-        students[0] = new Etudiant("Alice", 20, 85);
-        students[1] = new Etudiant("Bob", 22, 90);
-        students[2] = new Etudiant("Charlie", 19, 78);
+        Scanner scanner = new Scanner(System.in);
 
-        for (Etudiant etudiant : students) {
-            etudiant.afficherDetails();
-            System.out.println("------------------");
+        try {
+            System.out.print("Entrez un nombre : ");
+            int nombre = scanner.nextInt();
+
+            int result = nombre / 0;
+            System.out.println("Résultat : " + result);
+        } catch (ArithmeticException e) {
+            System.out.println("Erreur : Division par zéro impossible.");
         }
 
-        int somme = 0;
-        for (Etudiant etudiant : students) {
-            somme += etudiant.getNote();
+        try {
+            int[] tableau = {1, 2, 3};
+            System.out.println(tableau[5]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Erreur : Index hors limites du tableau.");
         }
 
-        double moyenne = (double) somme / students.length;
-        System.out.println("La moyenne des notes est: " + moyenne);
+        try {
+            verifierSolde(100, 150);
+        } catch (SoldeInsuffisantException e) {
+            System.out.println("Erreur bancaire : " + e.getMessage());
+        }
+
+        scanner.close();
+    }
+
+     public static void verifierSolde(double solde, double retrait)
+            throws SoldeInsuffisantException {
+
+        if (retrait > solde) {
+            throw new SoldeInsuffisantException(
+                "Solde insuffisant pour un retrait de " + retrait
+            );
+        }
+
+        System.out.println("Retrait de " + retrait + " effectué avec succès.");
     }
 }
