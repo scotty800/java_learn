@@ -1,44 +1,66 @@
 import java.util.Scanner;
+import java.io.*;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
+        
         try {
-            System.out.print("Entrez un nombre : ");
-            int nombre = scanner.nextInt();
+            FileReader fr = new FileReader("eleves.txt");
+            BufferedReader br = new BufferedReader(fr);
 
-            int result = nombre / 0;
-            System.out.println("Résultat : " + result);
-        } catch (ArithmeticException e) {
-            System.out.println("Erreur : Division par zéro impossible.");
+            String ligne;
+            while ((ligne = br.readLine()) != null) {
+                System.out.println(ligne);
+            }
+
+            br.close();
+
+        } catch (IOException e) {
+            System.out.println("Erreur lors de la lecture du fichier");
         }
 
         try {
-            int[] tableau = {1, 2, 3};
-            System.out.println(tableau[5]);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Erreur : Index hors limites du tableau.");
+            FileWriter fw = new FileWriter("nouveaux_eleves.txt");
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            for (int i = 1; i <= 5; i++) {
+                System.out.print("Entrez le nom de l'élève #" + i + " : ");
+                String nom = scanner.nextLine();
+                bw.write(nom);
+                bw.newLine();
+            }
+            bw.close();
+            System.out.println("Noms enregistrés dans 'nouveaux_eleves.txt'.");
+
+        } catch (IOException e) {
+            System.out.println("Erreur lors de l’écriture du fichier : " + e.getMessage());
         }
 
         try {
-            verifierSolde(100, 150);
-        } catch (SoldeInsuffisantException e) {
-            System.out.println("Erreur bancaire : " + e.getMessage());
+            FileReader fr = new FileReader("eleves.txt");
+            BufferedReader br = new BufferedReader(fr);
+            FileWriter fw = new FileWriter("eleves_num.txt");
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            String ligne;
+            int compteur = 1;
+
+            while ((ligne = br.readLine()) != null) {
+                bw.write(compteur + ". " + ligne);
+                bw.newLine();
+                compteur++;
+            }
+
+            br.close();
+            bw.close();
+
+            System.out.println("Fichier 'eleves_num.txt' créé avec succès !");
+
+        } catch (IOException e) {
+            System.out.println("Erreur lors du traitement des fichiers : " + e.getMessage());
         }
 
         scanner.close();
-    }
-
-     public static void verifierSolde(double solde, double retrait)
-            throws SoldeInsuffisantException {
-
-        if (retrait > solde) {
-            throw new SoldeInsuffisantException(
-                "Solde insuffisant pour un retrait de " + retrait
-            );
-        }
-
-        System.out.println("Retrait de " + retrait + " effectué avec succès.");
     }
 }
