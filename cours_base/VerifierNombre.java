@@ -1,3 +1,4 @@
+package cours_base;
 
 public class VerifierNombre {
     public static void main(String[] args) {

@@ -1,3 +1,4 @@
+package cours_base;
 import java.util.*;
 
 public class tab {

@@ -1,3 +1,4 @@
+package cours_base;
 public class Personne {
     private String nom;
     private int age;

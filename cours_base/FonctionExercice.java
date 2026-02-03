@@ -1,3 +1,4 @@
+package cours_base;
 public class FonctionExercice {
 
     // Exercice 5.1 — carré

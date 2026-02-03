@@ -1,3 +1,4 @@
+package cours_base;
 
 public class TableauxString {
     public static void main(String[] args) {

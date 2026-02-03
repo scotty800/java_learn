@@ -1,3 +1,4 @@
+package cours_base;
 
 public class BouclesExercice {
     public static void main(String[] args) {

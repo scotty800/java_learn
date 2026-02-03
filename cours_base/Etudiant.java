@@ -1,3 +1,4 @@
+package cours_base;
 public class Etudiant extends Personne{
     private int note;
 
