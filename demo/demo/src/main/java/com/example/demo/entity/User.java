@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+
 
 @Entity
 @Table(name = "users")
@@ -10,7 +12,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Le nom est obligatoire")
     private String name;
+
+    @Min(value = 1, message = "L' age doit être supérieur à 0")
     private Integer age; // PAS int
 
     public User() {}
@@ -20,7 +25,7 @@ public class User {
         this.age = age;
     }
 
-    // GETTERS & SETTERS obligatoires
+
     public Long getId() { return id; }
 
     public String getName() { return name; }
