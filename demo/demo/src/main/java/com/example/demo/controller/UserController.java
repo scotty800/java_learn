@@ -1,9 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.User;
+import com.example.demo.dto.UserDTO;
 import com.example.demo.service.UserService;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
+
 
 import java.util.List;
 
@@ -18,22 +20,24 @@ public class UserController {
     }
 
     @PostMapping
-    public User create(@Valid @RequestBody User user) {
+    public UserDTO create(@Valid @RequestBody User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         return service.create(user);
     }
 
     @GetMapping
-    public List<User> getAll() {
+    public List<UserDTO> getAll() {
         return service.getAll();
     }
 
     @GetMapping("/{id}")
-    public User getUser(@PathVariable Long id) {
+    public UserDTO getUser(@PathVariable Long id) {
         return service.getById(id);
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User user) {
+    public UserDTO updateUser(@PathVariable Long id, @RequestBody User user) {
         return service.update(id, user);
     }
 

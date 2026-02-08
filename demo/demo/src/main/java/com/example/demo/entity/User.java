@@ -16,13 +16,18 @@ public class User {
     private String name;
 
     @Min(value = 1, message = "L' age doit être supérieur à 0")
-    private Integer age; // PAS int
+    private Integer age;
+
+    private String password;
+    private String role;
 
     public User() {}
 
-    public User(String name, Integer age) {
+    public User(String name, Integer age, String password, String role) {
         this.name = name;
         this.age = age;
+        this.password = password;
+        this.role = role;
     }
 
 
@@ -33,4 +38,14 @@ public class User {
 
     public Integer getAge() { return age; }
     public void setAge(Integer age) { this.age = age; }
+
+    public String getPassword() { return password; }
+    public void  setPassword(String password) { 
+        this.password = password; 
+    }
+
+    public String getRole() { return role; }
+    public void setRole(String role) { 
+        this.role = role; 
+    }
 }
