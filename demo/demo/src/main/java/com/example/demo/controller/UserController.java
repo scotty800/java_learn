@@ -6,7 +6,6 @@ import com.example.demo.service.UserService;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
-
 import java.util.List;
 
 @RestController
