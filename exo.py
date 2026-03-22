@@ -1,13 +1,15 @@
 
-def two_sum(nums, target):
-    hash_map = {}
+def min_subarray_len(nums, target):
+    left = 0
+    current_sum = 0
+    min_length = float('inf')
 
-    for i, num in enumerate(nums):
-        complement = target - num
+    for right in range(len(nums)):
+        current_sum += nums[right]
 
-        if complement in hash_map:
-            return [hash_map[complement], i]
+        while current_sum >= target:
+            min_length = min(min_length, right - left + 1)
+            current_sum -= nums[left]
+            left += 1
 
-        hash_map[num] = i
-    
-    return None
+    return min_length if min_length != float('inf') else 0
